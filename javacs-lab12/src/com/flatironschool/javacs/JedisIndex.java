@@ -326,8 +326,14 @@ public class JedisIndex {
 
 		String source = "https://en.wikipedia.org/wiki/Java_(programming_language)";
 		WikiCrawler wc = new WikiCrawler(source, index);
-		// for testing purposes, load up the queue
-		Elements paragraphs = wf.fetchWikipedia(source);
-		wc.queueInternalLinks(paragraphs);
+	
+		Elements mulitpleContent = wf.fetchWikipedia(source);
+		wc.queueInternalLinks(multipleContent);
+		
+		// go through the links queued up and grab their content and index them
+		// for things in queue
+		Elements paragraphs = wf.readWikipedia(url);
+ -		index.indexPage(url, paragraphs);
+ 		// in web crawler, when each page gets to a new link.... we need to store its incoming link
 	}
 }
