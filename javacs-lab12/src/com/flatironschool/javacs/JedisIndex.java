@@ -321,6 +321,8 @@ public class JedisIndex {
 	 */
 	private static void loadIndex(JedisIndex index) throws IOException {
 		WikiFetcher wf = new WikiFetcher();
+		Jedis jedis = JedisMaker.make();
+		JedisIndex index = new JedisIndex(jedis); 
 
 		String source = "https://en.wikipedia.org/wiki/Java_(programming_language)";
 		WikiCrawler wc = new WikiCrawler(source, index);
